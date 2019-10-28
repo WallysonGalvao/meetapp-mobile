@@ -1,10 +1,12 @@
 import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Image } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 
 import logo from '~/assets/logo.png';
 
 import Background from '~/components/Background';
+import { signUpRequest } from '~/store/modules/auth/actions';
 
 import {
     Container,
@@ -16,6 +18,7 @@ import {
 } from './styles';
 
 export default function SignUp({ navigation }) {
+    const dispatch = useDispatch();
     const emailRef = useRef();
     const passwordRef = useRef();
 
@@ -23,8 +26,10 @@ export default function SignUp({ navigation }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    const loading = useSelector(state => state.auth.loading);
+
     function handleSubmit() {
-        console.log(name, email, password);
+        dispatch(signUpRequest(name, email, password));
     }
 
     return (
@@ -60,20 +65,21 @@ export default function SignUp({ navigation }) {
                     <FormInput
                         icon="lock-outline"
                         secureTextEntry
-                        placeholder="Digite sua senha secreta"
+                        placeholder="Sua senha secreta"
+                        ref={passwordRef}
                         returnKeyType="send"
                         onSubmitEditing={handleSubmit}
                         value={password}
                         onChangeText={setPassword}
                     />
 
-                    <SubmitButton onPress={handleSubmit}>
+                    <SubmitButton loading={loading} onPress={handleSubmit}>
                         Criar conta
                     </SubmitButton>
                 </Form>
 
                 <SignLink onPress={() => navigation.navigate('SignIn')}>
-                    <SignLinkText>Já tenho conta</SignLinkText>
+                    <SignLinkText>Já tenho login</SignLinkText>
                 </SignLink>
             </Container>
         </Background>
