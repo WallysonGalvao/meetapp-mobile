@@ -14,6 +14,14 @@ export const Image = styled.Image.attrs({
     height: 150px;
 `;
 
+export const Box = styled.View`
+    flex: 1;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    margin: 5px 0;
+`;
+
 export const Title = styled.Text`
     padding: 10px;
     font-size: 20px;
@@ -21,21 +29,8 @@ export const Title = styled.Text`
     font-weight: bold;
 `;
 
-export const Date = styled.Text`
-    margin-left: 15px;
+export const Info = styled.Text`
+    margin-left: 10px;
     font-size: 14px;
     color: #ccc;
-`;
-
-export const Location = styled.Text`
-    margin-left: 15px;
-    font-size: 14px;
-    color: #ccc;
-`;
-
-export const Organizer = styled.Text`
-    margin-left: 15px;
-    font-size: 14px;
-    color: #ccc;
-    margin-bottom: 10px;
 `;

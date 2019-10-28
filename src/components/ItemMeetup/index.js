@@ -2,16 +2,17 @@ import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { format, parseISO } from 'date-fns';
 import pt from 'date-fns/locale/pt';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import ItemButton from '~/components/Button';
-import { Container, Image, Title, Date, Location, Organizer } from './styles';
+import { Container, Image, Box, Title, Info } from './styles';
 
 export default function ItemMeetup({ data, onSubscribe, onCancel, isSubMode }) {
-    const imagem = data.File.url.replace('localhost', '192.168.0.109');
+    const imagem = data.File.url.replace('localhost', '192.168.0.30');
 
     const dateFormatted = useMemo(
         () =>
-            format(parseISO(data.date), "dd 'de' MMMM 'de' yyyy", {
+            format(parseISO(data.date), "dd 'de' MMMM', às' H:mm'h'", {
                 locale: pt,
             }),
         [data.date]
@@ -25,9 +26,22 @@ export default function ItemMeetup({ data, onSubscribe, onCancel, isSubMode }) {
                 }}
             />
             <Title>{data.title}</Title>
-            <Date>{dateFormatted}</Date>
-            <Location>{data.location}</Location>
-            <Organizer>{data.User.name}</Organizer>
+
+            <Box>
+                <Icon name="event" size={20} color="gray" />
+                <Info>{dateFormatted}</Info>
+            </Box>
+
+            <Box>
+                <Icon name="location-on" size={20} color="gray" />
+                <Info>{data.location}</Info>
+            </Box>
+
+            <Box>
+                <Icon name="person" size={20} color="gray" />
+                <Info>Organizador: {data.User.name}</Info>
+            </Box>
+
             {isSubMode ? (
                 <ItemButton onPress={onSubscribe}>
                     Realizar inscrição

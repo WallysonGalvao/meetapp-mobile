@@ -1,5 +1,4 @@
 import React, { useState, useMemo } from 'react';
-import PropTypes from 'prop-types';
 import { DatePickerIOS } from 'react-native';
 import { format } from 'date-fns';
 import pt from 'date-fns/locale/pt';
@@ -19,7 +18,7 @@ export default function DateInput({ date, onChange }) {
     return (
         <Container>
             <DateButton onPress={() => setOpened(!opened)}>
-                <Icon name="event" color="#fff" size={20} />
+                <Icon name="event" color="#FFF" size={20} />
                 <DateText>{dateFormatted}</DateText>
             </DateButton>
 
@@ -38,8 +37,3 @@ export default function DateInput({ date, onChange }) {
         </Container>
     );
 }
-
-DateInput.propTypes = {
-    date: PropTypes.string.isRequired,
-    onChange: PropTypes.func.isRequired,
-};
